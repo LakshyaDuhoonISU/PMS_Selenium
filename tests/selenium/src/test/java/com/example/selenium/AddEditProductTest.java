@@ -73,7 +73,7 @@ public class AddEditProductTest {
         // Wait for the update form to hydrate with the loaded product values
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("/update/"));
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe(
-            By.cssSelector("input[name='name']"), "value", originalName));
+                By.cssSelector("input[name='name']"), "value", originalName));
 
         // Update name
         WebElement nameInput = driver.findElement(By.cssSelector("input[name='name']"));
@@ -86,7 +86,7 @@ public class AddEditProductTest {
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("/products"));
         driver.get(BASE_URL + "/products");
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions
-            .presenceOfElementLocated(By.xpath("//td[contains(., '" + updatedName + "')]")));
+                .presenceOfElementLocated(By.xpath("//td[contains(., '" + updatedName + "')]")));
         Assert.assertTrue(driver.getPageSource().contains(updatedName));
     }
 }
