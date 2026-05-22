@@ -18,4 +18,6 @@ mvn test
 Notes:
 
 - Tests use WebDriverManager to automatically download the correct ChromeDriver.
-- Ensure the backend (`npm run dev` in `backend`) and frontend (`npm run dev` in `frontend`) are running on `localhost:3000` and `localhost:3000` respectively (frontend is default). If your frontend is on a different port change the `BASE_URL` in the test.
+- Ensure the backend and frontend are running before executing the tests.
+- Jenkins/TestNG report pattern: `**/testng-results.xml`.
+- If your frontend is on a different port, change the `BASE_URL` in the test or pass `-DbaseUrl=http://localhost:5173` to Maven.

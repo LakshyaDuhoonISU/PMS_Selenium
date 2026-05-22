@@ -1,24 +1,23 @@
 package com.example.selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddEditProductTest {
 
     private WebDriver driver;
     private final String BASE_URL = System.getProperty("baseUrl", "http://localhost:5173");
 
-    @BeforeEach
+    @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
         org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
@@ -31,7 +30,7 @@ public class AddEditProductTest {
         driver = new ChromeDriver(options);
     }
 
-    @AfterEach
+    @AfterMethod
     public void tearDown() {
         if (driver != null) {
             driver.quit();
@@ -64,7 +63,7 @@ public class AddEditProductTest {
         driver.get(BASE_URL + "/products");
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions
                 .presenceOfElementLocated(By.xpath("//td[contains(., '" + originalName + "')]")));
-        assertTrue(driver.getPageSource().contains(originalName));
+        Assert.assertTrue(driver.getPageSource().contains(originalName));
 
         // Click edit for the product row
         WebElement editLink = driver.findElement(
@@ -81,6 +80,6 @@ public class AddEditProductTest {
 
         // Verify updated name in products list
         driver.get(BASE_URL + "/products");
-        assertTrue(driver.getPageSource().contains(updatedName));
+        Assert.assertTrue(driver.getPageSource().contains(updatedName));
     }
 }
