@@ -49,12 +49,11 @@ Important checklist for interactive runs
 - Ensure the Jenkins agent user can launch GUI processes or Xvfb is available.
 - If you want to watch the test interactively, use `standalone-chrome-debug` and connect to its VNC port.
 
-Troubleshooting when Jenkins doesn't open a browser
---------------------------------------------------
+## Troubleshooting when Jenkins doesn't open a browser
 
-1) Check the Jenkins console log for errors from ChromeDriver or Chrome. Look for lines mentioning "chrome" or "org.openqa.selenium".
+1. Check the Jenkins console log for errors from ChromeDriver or Chrome. Look for lines mentioning "chrome" or "org.openqa.selenium".
 
-2) Verify `DISPLAY` and Chrome presence on the agent. On the agent shell run:
+2. Verify `DISPLAY` and Chrome presence on the agent. On the agent shell run:
 
 ```bash
 echo "DISPLAY=$DISPLAY"
@@ -62,16 +61,15 @@ which google-chrome chromium chromium-browser || true
 google-chrome --version || chromium-browser --version || true
 ```
 
-3) If `DISPLAY` is not set, either enable `Xvfb` on the agent or run the pipeline inside a container that provides a browser. The provided `run-tests.sh` will automatically use `xvfb-run` if available and `$DISPLAY` is unset.
+3. If `DISPLAY` is not set, either enable `Xvfb` on the agent or run the pipeline inside a container that provides a browser. The provided `run-tests.sh` will automatically use `xvfb-run` if available and `$DISPLAY` is unset.
 
-4) Ensure the pipeline actually passes `-Dheadless=false` to Maven. Example:
+4. Ensure the pipeline actually passes `-Dheadless=false` to Maven. Example:
 
 ```bash
 cd tests/selenium
 ./run-tests.sh -DbaseUrl=http://localhost:5173 -Dheadless=false
 ```
 
-5) If Chrome isn't installed on the agent, prefer the Docker approach with `selenium/standalone-chrome-debug` (includes browser + VNC). The commented example in the `Jenkinsfile` shows how to run tests inside that container.
+5. If Chrome isn't installed on the agent, prefer the Docker approach with `selenium/standalone-chrome-debug` (includes browser + VNC). The commented example in the `Jenkinsfile` shows how to run tests inside that container.
 
-6) If tests still start headless, add logging to confirm the TestNG test reads the system property by printing its value in `@BeforeMethod` (the test currently defaults to headless=true if property missing).
-
+6. If tests still start headless, add logging to confirm the TestNG test reads the system property by printing its value in `@BeforeMethod` (the test currently defaults to headless=true if property missing).

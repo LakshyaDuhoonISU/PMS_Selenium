@@ -21,7 +21,7 @@ public class AddEditProductTest {
     public void setup() {
         WebDriverManager.chromedriver().setup();
         org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
-        String headlessProp = System.getProperty("headless", "true");
+        String headlessProp = System.getProperty("headless", "false");
         System.out.println("[TEST DIAG] headless property: " + headlessProp);
         if (headlessProp.equalsIgnoreCase("true")) {
             options.addArguments("--headless=new");
