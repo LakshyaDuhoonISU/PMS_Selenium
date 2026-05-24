@@ -22,9 +22,11 @@ public class AddEditProductTest {
         WebDriverManager.chromedriver().setup();
         org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
         String headlessProp = System.getProperty("headless", "true");
+        System.out.println("[TEST DIAG] headless property: " + headlessProp);
         if (headlessProp.equalsIgnoreCase("true")) {
             options.addArguments("--headless=new");
         }
+        System.out.println("[TEST DIAG] ChromeOptions: " + options.toString());
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
