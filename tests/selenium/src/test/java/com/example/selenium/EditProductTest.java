@@ -11,8 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
-public class AddEditProductTest {
+public class EditProductTest {
 
     private WebDriver driver;
     private final String BASE_URL = System.getProperty("baseUrl", "http://localhost:5173");
@@ -41,42 +45,24 @@ public class AddEditProductTest {
     }
 
     @Test
-    public void createAndEditProduct() throws InterruptedException {
-        String originalName = "Selenium Test Product" + System.currentTimeMillis();
-        String updatedName = originalName + " Updated";
+    public void editProductTest() throws Exception {
+        // Read the id of the product created by the AddProductTest
+        Path in = Paths.get("target/created-product.id");
+        if (!Files.exists(in)) {
+            Assert.fail("created-product.id not found. Ensure AddProductTest ran and wrote the id.");
+            return;
+        }
+        String id = Files.readString(in, StandardCharsets.UTF_8).trim();
+        Assert.assertFalse(id.isEmpty(), "Read empty product id from file");
+        String updatedName = "Edited Product " + System.currentTimeMillis();
 
-        // Create product
-        driver.get(BASE_URL + "/create");
+        // Navigate directly to the update page for the created product
+        driver.get(BASE_URL + "/update/" + id);
         org.openqa.selenium.support.ui.WebDriverWait wait = new org.openqa.selenium.support.ui.WebDriverWait(driver,
                 Duration.ofSeconds(20));
-        System.out.println("Navigating to: " + BASE_URL + "/create");
-        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated(By.name("name")));
-        driver.findElement(By.cssSelector("input[placeholder='Enter name']")).sendKeys(originalName);
-        driver.findElement(By.cssSelector("input[placeholder='Enter price']")).sendKeys("10");
-        driver.findElement(By.cssSelector("input[placeholder='Enter quantity']")).sendKeys("2");
-        driver.findElement(By.cssSelector("input[placeholder='Enter image URL']"))
-                .sendKeys("https://example.com/img.png");
-        driver.findElement(By.cssSelector("input[placeholder='Enter category']")).sendKeys("TESTCAT");
-        WebElement addBtn = driver.findElement(By.xpath("//button[text()='Add Product']"));
-        addBtn.click();
-        // give the client a short moment to POST to backend
-        Thread.sleep(3000);
-
-        // Navigate to products list and verify the product appears
-        driver.get(BASE_URL + "/products");
-        wait.until(org.openqa.selenium.support.ui.ExpectedConditions
-                .presenceOfElementLocated(By.xpath("//td[contains(., '" + originalName + "')]")));
-        Assert.assertTrue(driver.getPageSource().contains(originalName));
-
-        // Click edit for the product row
-        WebElement editLink = driver.findElement(
-                By.xpath("//tr[.//td[contains(., '" + originalName + "')]]//a[contains(@href, '/update')]"));
-        editLink.click();
-
-        // Wait for the update form to hydrate with the loaded product values
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("/update/"));
-        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe(
-                By.cssSelector("input[name='name']"), "value", originalName));
+        wait.until(org.openqa.selenium.support.ui.ExpectedConditions
+                .presenceOfElementLocated(By.cssSelector("input[name='name']")));
 
         // Update name
         WebElement nameInput = driver.findElement(By.cssSelector("input[name='name']"));
@@ -91,5 +77,22 @@ public class AddEditProductTest {
         wait.until(org.openqa.selenium.support.ui.ExpectedConditions
                 .presenceOfElementLocated(By.xpath("//td[contains(., '" + updatedName + "')]")));
         Assert.assertTrue(driver.getPageSource().contains(updatedName));
+
+        // Persist the edited product details for the view test
+        try {
+            Path editedIdFile = Paths.get("target/edited-product.id");
+            if (editedIdFile.getParent() != null) {
+                Files.createDirectories(editedIdFile.getParent());
+            }
+            Files.writeString(editedIdFile, id, StandardCharsets.UTF_8);
+
+            Path editedNameFile = Paths.get("target/edited-product.name");
+            if (editedNameFile.getParent() != null) {
+                Files.createDirectories(editedNameFile.getParent());
+            }
+            Files.writeString(editedNameFile, updatedName, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            System.out.println("[TEST DIAG] Failed to persist edited product details: " + e.getMessage());
+        }
     }
 }

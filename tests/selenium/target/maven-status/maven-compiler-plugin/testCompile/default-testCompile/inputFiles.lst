@@ -1,1 +1,6 @@
-/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/AddEditProductTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/AddProductTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/DeleteProductTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/EditProductTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/HomePageTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/StatsPageTest.java
+/Users/lakshyaduhoon/Documents/react/pms_mern/tests/selenium/src/test/java/com/example/selenium/ViewProductTest.java

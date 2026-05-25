@@ -3,7 +3,12 @@
 <suite name="PMS Selenium Suite">
     <test name="Product UI Tests">
         <classes>
-            <class name="com.example.selenium.AddEditProductTest"/>
+            <class name="com.example.selenium.HomePageTest"/>
+            <class name="com.example.selenium.StatsPageTest"/>
+            <class name="com.example.selenium.AddProductTest"/>
+            <class name="com.example.selenium.EditProductTest"/>
+            <class name="com.example.selenium.ViewProductTest"/>
+            <class name="com.example.selenium.DeleteProductTest"/>
         </classes>
     </test>
 </suite>
