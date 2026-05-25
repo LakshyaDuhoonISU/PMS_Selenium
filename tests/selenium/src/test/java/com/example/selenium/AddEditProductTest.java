@@ -33,7 +33,8 @@ public class AddEditProductTest {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(3000);
         if (driver != null) {
             driver.quit();
         }
@@ -59,7 +60,7 @@ public class AddEditProductTest {
         WebElement addBtn = driver.findElement(By.xpath("//button[text()='Add Product']"));
         addBtn.click();
         // give the client a short moment to POST to backend
-        Thread.sleep(1500);
+        Thread.sleep(3000);
 
         // Navigate to products list and verify the product appears
         driver.get(BASE_URL + "/products");
