@@ -226,3 +226,30 @@ Open the `.jmx` file in JMeter and run it against the backend on `http://localho
 - Product detail pages, update pages, and stats pages are all routed in the frontend.
 - Cypress and Selenium are both used for browser-based verification.
 - JMeter is included for API-level load and functional testing.
+
+
+## Screenshots
+![alt text](<Screenshot 2026-06-11 at 23.48.24.png>)
+![alt text](<Screenshot 2026-06-11 at 23.48.36.png>)
+![alt text](<Screenshot 2026-06-11 at 23.48.45.png>)
+![alt text](<Screenshot 2026-06-11 at 23.48.54.png>)
+![alt text](<Screenshot 2026-06-11 at 23.49.00.png>)
+![alt text](<Screenshot 2026-06-11 at 23.49.07.png>)
+![alt text](<Screenshot 2026-06-11 at 23.49.14.png>)
+![alt text](<Screenshot 2026-06-11 at 23.49.56.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.03.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.09.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.18.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.24.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.31.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.42.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.52.png>)
+![alt text](<Screenshot 2026-06-11 at 23.50.58.png>)
+![alt text](<Screenshot 2026-06-11 at 23.51.05.png>)
+![alt text](<Screenshot 2026-06-11 at 23.51.11.png>)
+![alt text](<Screenshot 2026-06-11 at 23.51.18.png>)
+![alt text](<Screenshot 2026-06-11 at 23.51.24.png>)
+![alt text](<Screenshot 2026-06-11 at 23.53.12.png>)
+![alt text](<Screenshot 2026-06-11 at 23.53.22.png>)
+![alt text](<Screenshot 2026-06-11 at 23.53.39.png>)
+![alt text](<Screenshot 2026-06-11 at 23.53.51.png>)
